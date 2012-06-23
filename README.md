@@ -1,4 +1,4 @@
-# MoaiRunner
+# MoaiRemote
 
 This is an utility to launch Moai apps remotely without building
 
