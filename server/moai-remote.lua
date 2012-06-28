@@ -5,6 +5,7 @@ local MAGIC_HEADER = "MOAI_REMOTE:"
 local PING = MAGIC_HEADER.."PING"
 local PONG = MAGIC_HEADER.."PONG:"
 local LAUNCH = MAGIC_HEADER.."LAUNCH"
+local dataSock = assert(socket.tcp())
 
 local function search(timeout)
 	local sock = assert(socket.udp())
@@ -26,7 +27,6 @@ end
 local function deploy(path, address)
 	local file = assert(io.open(path, "rb"))
 	local cmdSock = assert(socket.udp())
-	local dataSock = assert(socket.tcp())
 	dataSock:bind("*", 9002)
 	assert(dataSock:listen(1))
 	cmdSock:sendto(LAUNCH, address, PORT)
@@ -34,6 +34,7 @@ local function deploy(path, address)
 	local sink = socket.sink("close-when-done", client)
 	local source = ltn12.source.file(file)
 	ltn12.pump.all(source, sink)
+    dataSock:close()
 end
 
 local cmd = arg[1]
@@ -44,6 +45,7 @@ elseif cmd == "deploy" then
 	local path = arg[2]
 	local address = arg[3]
 	deploy(path, address)
+    dataSock:close()
 else
 	print("Invalid command")
 end

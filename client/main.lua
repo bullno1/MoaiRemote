@@ -6,8 +6,23 @@
 require ("lua-enumerable")
 
 local APP_NAME = "MOAI Remote"
-local STAGE_WIDTH = 480
-local STAGE_HEIGHT = 960
+
+local STAGE_HEIGHT = 0
+local STAGE_WIDTH = 0
+
+-- grrr.. MOAI .. grr..
+if (MOAIEnvironment.screenHeight ~= nil) and (MOAIEnvironment.screenWidth ~= nil) then
+  STAGE_WIDTH = MOAIEnvironment.screenWidth 
+  STAGE_HEIGHT = MOAIEnvironment.screenHeight
+end
+
+if (MOAIEnvironment.verticalResolution ~= nil) and (MOAIEnvironment.horizontalResolution ~= nil) then
+  STAGE_WIDTH = MOAIEnvironment.horizontalResolution 
+  STAGE_HEIGHT = MOAIEnvironment.verticalResolution
+end
+
+if STAGE_HEIGHT == 0 then STAGE_HEIGHT = 960 print ("height fixup") end
+if STAGE_WIDTH == 0 then STAGE_WIDTH = 960 print ("width fixup") end
 
 -- rudimentary app message store
 local mrMessages = {}
@@ -63,7 +78,7 @@ mrAppLayer:insertProp ( mrBGProp )
 local asciiTextCodes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-'
 local appFonts = {}
 
-appFonts["anonymous"] 	= {ttf='anonymous.ttf', textcodes=asciiTextCodes, font=MOAIFont.new(), size=12, dpi=163}
+appFonts["anonymous"] 	= {ttf='anonymous.ttf', textcodes=asciiTextCodes, font=MOAIFont.new(), size=36, dpi=163}
 
 table.all(appFonts, function(appFont, index) 
                     print ("appFont ", appFont.ttf) 
