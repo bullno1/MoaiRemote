@@ -9,7 +9,7 @@ This is an utility to launch Moai apps remotely without building
 - Build a Moai app for your platform with the provided main.lua as the only source file
 - Launch it on your device
 - Make sure that your device's wifi is on and it's in the same network with your development computer
-- Yes, the screen is supposed to be black, don't worry
+- Yes, the GUI is rudimentary, but it works.  
 
 ## Locate your device (optional):
 
