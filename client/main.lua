@@ -29,7 +29,7 @@ local mrMessages = {}
 mrMessages["welcome"] = "<c:2CF>welcome<c>to<c:F52> " .. APP_NAME .. "\n\n\nwaiting for server.."
 mrMessages["data"] = "data happening! "
 mrMessages["sendto"] = "server said hi!"
-mrMessages["execute"] = "time to execute! "
+mrMessages["execute"] = "receiving new package to execute... "
 mrMessages["returntomain"] = "returning .. "
 
 -- MOAI: set up the basics .. mr-* = moai remote-*
